@@ -13,10 +13,11 @@
 .include "sneslib.asm"      ; low-level API
 .include "scene1.asm"       ; \ 
 .include "scene2.asm"       ;  | SNES pr0n \o/
-.include "scene3.asm"       ; /
+.include "scene3.asm"       ;  |
+.include "scene4.asm"       ; /
 
-SCN_INIT_PROC:  .dw Scene1Init,Scene2Init,Scene3Init
-SCN_VB_PROC:    .dw Scene1Vblank,Scene2Vblank,Scene3Vblank
+SCN_INIT_PROC:  .dw Scene1Init,Scene2Init,Scene3Init,Scene4Init
+SCN_VB_PROC:    .dw Scene1Vblank,Scene2Vblank,Scene3Vblank,Scene4Vblank
 
 .define CURRENT_SCN $7F0100
 
@@ -153,6 +154,19 @@ S2BG1PalBeg
     .incbin "data/scene2_bg.clr"
 S2BG1PalEnd
 
+.bank 3 slot 0
+.org 8000
+
+.section "CharacterData4"
+; I'm resuse the previous one.
+; Bitmap font for scene 2 (chr data + pal), 4bpp
+S2ChrDataBeg:
+    .incbin "data/demo_sprites.pic"
+S2ChrDataEnd
+
+S2BmpFontPalBeg:
+    .incbin "data/demo_sprites.clr"
+S2BmpFontPalEnd
 
 .ends
 
